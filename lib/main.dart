@@ -1,49 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:practice/screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      theme: _lightThemeData(),
+      darkTheme: _darkThemeData(),
+      themeMode: ThemeMode.system, // Automatically switch themes based on system settings
+      home: SumScreen(),
+    );
+  }
+
+  ThemeData _lightThemeData() {
+    return ThemeData(
+      brightness: Brightness.light,
+      inputDecorationTheme: const InputDecorationTheme(
+        enabledBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+        focusedBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+        errorBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            fixedSize: const Size.fromWidth(double.maxFinite),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            backgroundColor: Colors.purple,
+            foregroundColor: Colors.white),
+      ),
+    );
+  }
+
+  ThemeData _darkThemeData() {
+    return ThemeData(
+      brightness: Brightness.dark,
+      inputDecorationTheme: const InputDecorationTheme(
+        enabledBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+        focusedBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+        errorBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            fixedSize: const Size.fromWidth(double.maxFinite),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            backgroundColor: Colors.purple,
+            foregroundColor: Colors.white),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int number=0;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            number=number+1;
-          });
-        },
-        child: Icon(Icons.add),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Increment= ${number}'),
-          ],
-        ),
-      ),
-    );
-  }
-}
